@@ -12,6 +12,7 @@ class DeviceController extends Controller
     {
         $device = new Device;
         $device->nama_device = $request->nama_device;
+        $device->nilai = $request->nilai;
         $device->save();
         
         return response()->json([
@@ -26,10 +27,11 @@ class DeviceController extends Controller
         {
         if (Device::where('id', $id) >exists()) {
             $device = Device::find($id);
-            $device->nama_device =
-            is_null($request >nama_device) ? $device->nama_device :
-            $request->nama_device;
+            $device->nama_device = is_null($request >nama_device) ? $device->nama_device : $request->nama_device;
+            $device->nilai = is_null($request->nilai) ? $device->nilai : $request->nilai;
             $device->save();
+            
+
             return response()->json([
             "message" => "Device telah diupdate."
             ], 201);
@@ -53,4 +55,29 @@ class DeviceController extends Controller
             ], 404);
         }
     }
+
+    public function showDevices()
+    {
+        $devices = Device::all(); // Mengambil semua data perangkat dari database
+        return view('devices', [
+            "title" => "Devices",
+            "devices" => $devices
+        ]);
+    }
+
+    // Method untuk mendapatkan ID dari database
+    public function getDeviceId($id)
+{
+    $device = Device::find($id); // Mengambil data perangkat berdasarkan ID
+    if (!$device) {
+        // Mengembalikan pesan jika perangkat tidak ditemukan
+        return "Perangkat dengan ID $id tidak ditemukan.";
+    }
+    return view('devices', [
+        "title" => "Devices",
+        "devices" => [$device] // Mengirimkan data perangkat dalam bentuk array
+    ]);
+}
+
+    
 }

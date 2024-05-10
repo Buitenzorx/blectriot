@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('devices', function (Blueprint $table) {
             $table->id();
             $table->string('nama_device');
+            $table->integer('nilai');
             $table->timestamps();
         });
     }
