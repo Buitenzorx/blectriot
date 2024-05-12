@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DeviceController;
+use App\Http\Controllers\DataController;
 
 Route::get('/dashboard', function(){
     return view('dashboard');

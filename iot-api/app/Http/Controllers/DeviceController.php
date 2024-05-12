@@ -25,9 +25,9 @@ class DeviceController extends Controller
     }
     public function update(Request $request, string $id)
         {
-        if (Device::where('id', $id) >exists()) {
+        if (Device::where('id', $id)->exists()) {
             $device = Device::find($id);
-            $device->nama_device = is_null($request >nama_device) ? $device->nama_device : $request->nama_device;
+            $device->nama_device = is_null($request ->nama_device) ? $device->nama_device : $request->nama_device;
             $device->nilai = is_null($request->nilai) ? $device->nilai : $request->nilai;
             $device->save();
             
@@ -37,7 +37,7 @@ class DeviceController extends Controller
             ], 201);
         } else {
             return response()->json([
-            "message" > "Device tidak ditemukan."
+            "message" => "Device tidak ditemukan."
             ], 404);
         }
         }
@@ -59,9 +59,11 @@ class DeviceController extends Controller
     public function showDevices()
     {
         $devices = Device::all(); // Mengambil semua data perangkat dari database
+        $nilai = Device::pluck('nilai');
         return view('devices', [
             "title" => "Devices",
-            "devices" => $devices
+            "devices" => $devices,
+            "nilai" => $nilai
         ]);
     }
 
@@ -69,15 +71,15 @@ class DeviceController extends Controller
     public function getDeviceId($id)
 {
     $device = Device::find($id); // Mengambil data perangkat berdasarkan ID
+    $nilai = Device::pluck('nilai');
     if (!$device) {
-        // Mengembalikan pesan jika perangkat tidak ditemukan
         return "Perangkat dengan ID $id tidak ditemukan.";
     }
     return view('devices', [
         "title" => "Devices",
-        "devices" => [$device] // Mengirimkan data perangkat dalam bentuk array
+        "devices" => [$device], 
+        "nilai" => [$nilai]
     ]);
-}
+}   
 
-    
 }

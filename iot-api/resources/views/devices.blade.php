@@ -9,6 +9,7 @@
         <td style="border-right: 1px solid black; border-bottom: 1px solid black;">No</td>
         <td style="border-right: 1px solid black; border-bottom: 1px solid black;">ID</td>
         <td style="border-right: 1px solid black; border-bottom: 1px solid black;">Device Name</td>
+        <td style="border-right: 1px solid black; border-bottom: 1px solid black;">Nilai</td>
         <td style="border-right: 1px solid black; border-bottom: 1px solid black;">Created At</td>
         <td style="border-bottom: 1px solid black;">Updated At</td>
     </tr>
@@ -19,6 +20,7 @@
           <a href="/devices/{{ $device["id"] }}">{{ $device["id"] }}</a>
         </td>
         <td style="border-right: 1px solid black; border-bottom: 1px solid black;">{{ $device->nama_device }}</td>
+        <td style="border-right: 1px solid black; border-bottom: 1px solid black;">{{ $device->nilai }}</td>
         <td style="border-right: 1px solid black; border-bottom: 1px solid black;">{{ $device->created_at }}</td>
         <td style="border-bottom: 1px solid black;">{{ $device->updated_at }}</td>
       </tr>
